@@ -23,14 +23,14 @@ class Command(BaseCommand):
                 self.stdout.write(
                     self.style.SUCCESS("Region: {} - Created".format(region))
                 )
-            country, country_created = Country.objects.get_or_create(
+            country, country_created = Country.objects.update_or_create(
                 name=row["name"],
                 defaults={
                     "alpha2Code": row["alpha2Code"],
                     "alpha3Code": row["alpha3Code"],
                     "population": row["population"],
                     "region": region,
-                    "topLevelDomain": ",".join(row.get("topLevelDomain", [])),
+                    "topleveldomain": ",".join(row.get("topLevelDomain", [])),
                     "capital": row.get("capital", "")
                 },
             )
