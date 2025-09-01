@@ -30,6 +30,8 @@ class Command(BaseCommand):
                     "alpha3Code": row["alpha3Code"],
                     "population": row["population"],
                     "region": region,
+                    "topLevelDomain": ",".join(row.get("topLevelDomain", [])),
+                    "capital": row.get("capital", "")
                 },
             )
 
