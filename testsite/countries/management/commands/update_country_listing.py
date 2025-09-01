@@ -1,21 +1,19 @@
-import json
-import os
-
 from django.conf import settings
 from django.core.management.base import BaseCommand
+import requests
 
 from countries.models import Country, Region
 
 
 class Command(BaseCommand):
-    help = "Loads country data from a JSON file."
+    help = "Loads country data from api."
 
-    IMPORT_FILE = os.path.join(settings.BASE_DIR, "..", "data", "countries.json")
+    API_URL = "https://storage.googleapis.com/dcr-django-test/countries.json"
 
     def get_data(self):
-        with open(self.IMPORT_FILE) as f:
-            data = json.load(f)
-        return data
+        response = requests.get(self.API_URL)
+        response.raise_for_status()
+        return response.json()
 
     def handle(self, *args, **options):
         data = self.get_data()
