@@ -6,6 +6,8 @@ class Country(models.Model):
     alpha2Code = models.CharField(max_length=2)
     alpha3Code = models.CharField(max_length=3)
     population = models.IntegerField()
+    topLevelDomain = models.CharField(max_length=50, blank=True, null=True) # storing as comma-separated values due to sqlite limitations
+    capital = models.CharField(max_length=100, blank=True, null=True)
 
     region = models.ForeignKey(
         "Region",
